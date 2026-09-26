@@ -1,0 +1,12 @@
+{
+  "name": "lab1_alexander_zaporojan",
+  "version": "1.0.0",
+  "description": "Lab 1: simple HTTP server on Node.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

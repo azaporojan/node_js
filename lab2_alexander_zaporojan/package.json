@@ -1,0 +1,15 @@
+{
+  "name": "lab2_alexander_zaporojan",
+  "version": "1.0.0",
+  "description": "Lab 2: REST API on Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
