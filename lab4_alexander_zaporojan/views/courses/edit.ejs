@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<h2>Редактировать курс</h2>
+
+<% if (errors.length > 0) { %>
+    <ul class="errors">
+        <% for (const error of errors) { %>
+            <li><%= error %></li>
+        <% } %>
+    </ul>
+<% } %>
+
+<form class="form" action="/courses/<%= course.id %>/edit" method="POST">
+    <label for="title">Название дисциплины</label>
+    <input type="text" id="title" name="title" value="<%= course.title %>">
+
+    <label for="credits">Количество кредитов</label>
+    <input type="text" id="credits" name="credits" value="<%= course.credits %>">
+
+    <label for="semester">Семестр</label>
+    <input type="text" id="semester" name="semester" value="<%= course.semester %>">
+
+    <label for="description">Описание</label>
+    <textarea id="description" name="description" rows="4"><%= course.description %></textarea>
+
+    <label for="teacherId">Преподаватель</label>
+    <select id="teacherId" name="teacherId">
+        <option value="">Выберите преподавателя</option>
+        <% for (const teacher of teachers) { %>
+            <option value="<%= teacher.id %>" <% if (Number(course.teacherId) === teacher.id) { %>selected<% } %>><%= teacher.name %></option>
+        <% } %>
+    </select>
+
+    <button class="btn btn-add" type="submit">Сохранить изменения</button>
+    <a class="btn btn-gray" href="/courses">Отмена</a>
+</form>
+
+<%- include('../partials/footer') %>

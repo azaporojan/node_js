@@ -1,14 +1,14 @@
-// Formats a date as DD.MM.YYYY HH:MM
-function formatDate(date) {
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()} ` +
-    `${pad(date.getHours())}:${pad(date.getMinutes())}`;
-}
-
-// Logs every request: HTTP Method | URL | Date and Time
 function logger(req, res, next) {
-  console.log(`${req.method} | ${req.originalUrl} | ${formatDate(new Date())}`);
-  next();
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const date = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes;
+
+    console.log(req.method + ' | ' + req.originalUrl + ' | ' + date);
+    next();
 }
 
 module.exports = logger;

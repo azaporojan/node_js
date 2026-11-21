@@ -1,45 +1,37 @@
-# Node.js labs — Alexander Zaporojan
+# Лабораторные работы по Node.js / Express.js
 
-| Folder | Lab | Run |
-|---|---|---|
-| `lab1_alexander_zaporojan` | Lab 1 — simple HTTP server on the built-in `http` module | `cd lab1_alexander_zaporojan && node app.js` |
-| `lab2_alexander_zaporojan` | Lab 2 — REST API on Express.js (MVC) | `cd lab2_alexander_zaporojan && npm install && npm start` |
+Курс «Разработка серверных приложений» (SSdev), секция FR.
 
-Both servers listen on http://localhost:3000.
+**Студент:** Alexander Zaporojan, группа IA2403
 
-## Lab 1 routes
+## Структура репозитория
 
-| Method | URL | Result |
-|---|---|---|
-| GET | `/` | Greeting |
-| GET | `/about` | About the app |
-| GET | `/student` | Student name, surname and group (text) |
-| GET | `/api/student` | Student data (JSON) |
-| GET | `/time` | Current date and time |
-| GET | `/api/courses` | Courses list (JSON) |
-| GET | `/api/tip` | Custom route: random programming tip (JSON) |
-| * | anything else | `404 - Page not found` with real 404 status |
+Каждая лабораторная работа лежит в своей папке. Внутри каждой папки есть свой `README.md` — это отчёт по работе.
 
-Each request is logged as `GET | /about | 09.09.2026 15:25`.
+| Папка | Тема | Отчёт |
+| --- | --- | --- |
+| `lab1_alexander_zaporojan` | Простой HTTP-сервер на модуле `http` | [README](lab1_alexander_zaporojan/README.md) |
+| `lab2_alexander_zaporojan` | REST API на Express.js (книги и авторы) | [README](lab2_alexander_zaporojan/README.md) |
+| `lab3_alexander_zaporojan` | Веб-приложение на Express.js, EJS и middleware | [README](lab3_alexander_zaporojan/README.md) |
+| `lab4_alexander_zaporojan` | CRUD-приложение с PostgreSQL и Sequelize | [README](lab4_alexander_zaporojan/README.md) |
+| `lab5_alexander_zaporojan` | Аутентификация, авторизация, логи и WebSocket | [README](lab5_alexander_zaporojan/README.md) |
 
-## Lab 2 routes
+Лабораторные №3, №4 и №5 — это один проект «Система управления учебными курсами». В каждой следующей работе он становится больше:
 
-| Method | URL | Purpose |
-|---|---|---|
-| GET | `/api/books` | All books, filters `?genre=` and `?year=` |
-| GET | `/api/books/search?title=` | Case-insensitive search by part of title |
-| GET | `/api/books/:id` | Book by ID (404 `Book not found`) |
-| POST | `/api/books` | Create book → 201; 400 on missing fields or unknown `authorId` |
-| PATCH | `/api/books/:id` | Update book |
-| DELETE | `/api/books/:id` | Delete book |
-| GET | `/api/authors` | All authors |
-| GET | `/api/authors/:id` | Author by ID |
-| GET | `/api/authors/:id/books` | Books of an author |
-| GET | `/api/statistics` | Books/authors/genres count, newest and oldest book |
-| * | anything else | 404 `{"error": "Route not found"}` |
+- №3 — курсы хранятся в массиве;
+- №4 — курсы и преподаватели хранятся в PostgreSQL;
+- №5 — добавлены пользователи, роли, сессии, логи и уведомления.
 
-Example POST body:
+## Как запустить
 
-```json
-{ "title": "Clean Code", "authorId": 3, "genre": "programming", "year": 2008 }
-```
+Все приложения работают на `http://localhost:3000`, поэтому запускать их нужно по одному.
+
+| Работа | Команды |
+| --- | --- |
+| №1 | `cd lab1_alexander_zaporojan` → `node app.js` |
+| №2 | `cd lab2_alexander_zaporojan` → `npm install` → `npm start` |
+| №3 | `cd lab3_alexander_zaporojan` → `npm install` → `npm start` |
+| №4 | нужен PostgreSQL и файл `.env`, см. отчёт |
+| №5 | нужен PostgreSQL и файл `.env`, см. отчёт |
+
+Файлы `.env` и папки `node_modules` в репозиторий не загружаются. Для работ №4 и №5 есть пример `.env.example`.

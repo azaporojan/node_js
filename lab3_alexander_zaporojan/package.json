@@ -1,0 +1,16 @@
+{
+  "name": "lab3_alexander_zaporojan",
+  "version": "1.0.0",
+  "description": "Lab 3: web application on Express.js, EJS and middleware",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Alexander Zaporojan",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.3.0"
+  }
+}

@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<% if (error) { %>
+    <ul class="errors">
+        <li><%= error %></li>
+    </ul>
+<% } %>
+
+<div class="card">
+    <h2><%= teacher.name %></h2>
+    <p><b>Email:</b> <%= teacher.email %></p>
+    <p><b>Кафедра:</b> <%= teacher.department %></p>
+    <p><b>Учёная степень:</b> <%= teacher.academicDegree %></p>
+    <p><b>Количество курсов:</b> <%= teacher.Courses.length %></p>
+
+    <h3>Курсы преподавателя</h3>
+    <% if (teacher.Courses.length === 0) { %>
+        <p>У преподавателя нет курсов</p>
+    <% } else { %>
+        <ul>
+            <% for (const course of teacher.Courses) { %>
+                <li><a href="/courses/<%= course.id %>"><%= course.title %></a> (семестр <%= course.semester %>, кредитов: <%= course.credits %>)</li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <div class="actions">
+        <a class="btn btn-gray" href="/teachers">К списку преподавателей</a>
+        <a class="btn btn-edit" href="/teachers/<%= teacher.id %>/edit">Редактировать</a>
+        <form action="/teachers/<%= teacher.id %>/delete" method="POST" onsubmit="return confirm('Вы действительно хотите удалить этого преподавателя?')">
+            <button class="btn btn-delete" type="submit">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

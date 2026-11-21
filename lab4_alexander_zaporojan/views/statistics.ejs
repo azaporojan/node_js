@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<h2>Статистика</h2>
+
+<div class="card">
+    <p><b>Всего преподавателей:</b> <%= teachersCount %></p>
+    <p><b>Всего курсов:</b> <%= coursesCount %></p>
+    <p>
+        <b>Преподаватель с наибольшим количеством курсов:</b>
+        <% if (topTeacher) { %>
+            <%= topTeacher.name %> (<%= topTeacher.Courses.length %>)
+        <% } else { %>
+            нет данных
+        <% } %>
+    </p>
+</div>
+
+<h3>Количество курсов в каждом семестре</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Семестр</th>
+            <th>Курсов</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (const item of semesters) { %>
+            <tr>
+                <td><%= item.semester %></td>
+                <td><%= item.count %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<h3>Количество курсов у каждого преподавателя</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Преподаватель</th>
+            <th>Курсов</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (const teacher of teachers) { %>
+            <tr>
+                <td><%= teacher.name %></td>
+                <td><%= teacher.Courses.length %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include('partials/footer') %>

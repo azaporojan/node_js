@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<div class="card">
+    <h2>Профиль</h2>
+    <p><b>Имя:</b> <%= user.name %></p>
+    <p><b>Email:</b> <%= user.email %></p>
+    <p><b>Роль:</b> <%= user.role %></p>
+    <p><b>Дата регистрации:</b> <%= user.createdAt.toLocaleString('ru-RU') %></p>
+    <p>
+        <b>Последний вход:</b>
+        <% if (user.lastLogin) { %>
+            <%= user.lastLogin.toLocaleString('ru-RU') %>
+        <% } else { %>
+            нет данных
+        <% } %>
+    </p>
+</div>
+
+<%- include('partials/footer') %>

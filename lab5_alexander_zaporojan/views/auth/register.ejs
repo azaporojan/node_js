@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<h2>Регистрация</h2>
+
+<% if (errors.length > 0) { %>
+    <ul class="errors">
+        <% for (const error of errors) { %>
+            <li><%= error %></li>
+        <% } %>
+    </ul>
+<% } %>
+
+<form class="form" action="/register" method="POST">
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" value="<%= name %>">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" value="<%= email %>">
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password">
+
+    <label for="confirmPassword">Подтверждение пароля</label>
+    <input type="password" id="confirmPassword" name="confirmPassword">
+
+    <button class="btn btn-add" type="submit">Зарегистрироваться</button>
+</form>
+
+<p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+
+<%- include('../partials/footer') %>

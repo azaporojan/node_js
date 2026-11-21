@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<h2>Добавить преподавателя</h2>
+
+<% if (errors.length > 0) { %>
+    <ul class="errors">
+        <% for (const error of errors) { %>
+            <li><%= error %></li>
+        <% } %>
+    </ul>
+<% } %>
+
+<form class="form" action="/teachers" method="POST">
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" value="<%= teacher.name %>">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" value="<%= teacher.email %>">
+
+    <label for="department">Кафедра</label>
+    <input type="text" id="department" name="department" value="<%= teacher.department %>">
+
+    <label for="academicDegree">Учёная степень</label>
+    <input type="text" id="academicDegree" name="academicDegree" value="<%= teacher.academicDegree %>">
+
+    <button class="btn btn-add" type="submit">Сохранить</button>
+    <a class="btn btn-gray" href="/teachers">Отмена</a>
+</form>
+
+<%- include('../partials/footer') %>

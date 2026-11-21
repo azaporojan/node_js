@@ -3,8 +3,7 @@ const bookController = require('../controllers/bookController');
 
 const router = express.Router();
 
-router.get('/', bookController.getAllBooks);
-// /search must be declared before /:id, otherwise "search" is treated as an id
+router.get('/', bookController.getBooks);
 router.get('/search', bookController.searchBooks);
 router.get('/:id', bookController.getBookById);
 router.post('/', bookController.createBook);

@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<h2>Преподаватели</h2>
+
+<a class="btn btn-add" href="/teachers/new">Добавить преподавателя</a>
+
+<% if (teachers.length === 0) { %>
+    <p class="empty">Преподаватели не найдены</p>
+<% } else { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Кафедра</th>
+                <th>Учёная степень</th>
+                <th>Курсов</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const teacher of teachers) { %>
+                <tr>
+                    <td><%= teacher.name %></td>
+                    <td><%= teacher.email %></td>
+                    <td><%= teacher.department %></td>
+                    <td><%= teacher.academicDegree %></td>
+                    <td><%= teacher.Courses.length %></td>
+                    <td class="actions">
+                        <a class="btn btn-view" href="/teachers/<%= teacher.id %>">Просмотр</a>
+                        <a class="btn btn-edit" href="/teachers/<%= teacher.id %>/edit">Редактировать</a>
+                        <form action="/teachers/<%= teacher.id %>/delete" method="POST" onsubmit="return confirm('Вы действительно хотите удалить этого преподавателя?')">
+                            <button class="btn btn-delete" type="submit">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+<% } %>
+
+<%- include('../partials/footer') %>

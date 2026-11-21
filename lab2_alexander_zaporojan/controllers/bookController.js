@@ -1,168 +1,164 @@
-const bookModel = require('../models/bookModel');
-const authorModel = require('../models/authorModel');
+const books = require('../models/bookModel');
+const authors = require('../models/authorModel');
 
-const REQUIRED_FIELDS = ['title', 'authorId', 'genre', 'year'];
+function getBooks(req, res) {
+    let result = books;
 
-function isEmpty(value) {
-  return value === undefined || value === null || value === '';
+    if (req.query.genre) {
+        result = result.filter((b) => b.genre === req.query.genre);
+    }
+
+    if (req.query.year) {
+        result = result.filter((b) => b.year === Number(req.query.year));
+    }
+
+    res.json(result);
 }
 
-// Checks field types; returns an error message or null
-function validateFields(data) {
-  if (data.title !== undefined && typeof data.title !== 'string') {
-    return 'Field "title" must be a string';
-  }
-  if (data.genre !== undefined && typeof data.genre !== 'string') {
-    return 'Field "genre" must be a string';
-  }
-  if (data.authorId !== undefined && !Number.isInteger(data.authorId)) {
-    return 'Field "authorId" must be an integer';
-  }
-  if (data.year !== undefined && !Number.isInteger(data.year)) {
-    return 'Field "year" must be an integer';
-  }
-  return null;
-}
-
-// GET /api/books  (optional filters: ?genre=...&year=...)
-function getAllBooks(req, res) {
-  const { genre, year } = req.query;
-  let books = bookModel.getAll();
-
-  if (genre) {
-    books = books.filter((book) => book.genre.toLowerCase() === genre.toLowerCase());
-  }
-  if (year) {
-    books = books.filter((book) => book.year === Number(year));
-  }
-
-  res.status(200).json(books);
-}
-
-// GET /api/books/search?title=...
 function searchBooks(req, res) {
-  const { title } = req.query;
+    const title = req.query.title;
 
-  if (isEmpty(title)) {
-    return res.status(400).json({ error: 'Query parameter "title" is required' });
-  }
+    if (!title) {
+        return res.status(400).json({ error: 'Title is required' });
+    }
 
-  const query = title.toLowerCase();
-  const books = bookModel.getAll().filter((book) => book.title.toLowerCase().includes(query));
-
-  res.status(200).json(books);
+    const result = books.filter((b) => b.title.toLowerCase().includes(title.toLowerCase()));
+    res.json(result);
 }
 
-// GET /api/books/:id
 function getBookById(req, res) {
-  const book = bookModel.getById(Number(req.params.id));
+    const id = Number(req.params.id);
+    const book = books.find((b) => b.id === id);
 
-  if (!book) {
-    return res.status(404).json({ error: 'Book not found' });
-  }
+    if (!book) {
+        return res.status(404).json({ error: 'Book not found' });
+    }
 
-  res.status(200).json(book);
+    res.json(book);
 }
 
-// POST /api/books
 function createBook(req, res) {
-  const body = req.body || {};
+    if (!req.body) {
+        return res.status(400).json({ error: 'Request body is required' });
+    }
 
-  const missing = REQUIRED_FIELDS.filter((field) => isEmpty(body[field]));
-  if (missing.length > 0) {
-    return res.status(400).json({ error: `Missing required fields: ${missing.join(', ')}` });
-  }
+    const title = req.body.title;
+    const authorId = req.body.authorId;
+    const genre = req.body.genre;
+    const year = req.body.year;
 
-  const { title, authorId, genre, year } = body;
+    if (!title || !authorId || !genre || !year) {
+        return res.status(400).json({ error: 'Fields title, authorId, genre and year are required' });
+    }
 
-  const typeError = validateFields({ title, authorId, genre, year });
-  if (typeError) {
-    return res.status(400).json({ error: typeError });
-  }
+    const author = authors.find((a) => a.id === Number(authorId));
 
-  if (!authorModel.getById(authorId)) {
-    return res.status(400).json({ error: 'Author does not exist' });
-  }
+    if (!author) {
+        return res.status(400).json({ error: 'Author does not exist' });
+    }
 
-  const book = bookModel.create({ title, authorId, genre, year });
-  res.status(201).json(book);
+    let maxId = 0;
+    for (const book of books) {
+        if (book.id > maxId) {
+            maxId = book.id;
+        }
+    }
+
+    const newBook = {
+        id: maxId + 1,
+        title: title,
+        authorId: Number(authorId),
+        genre: genre,
+        year: Number(year)
+    };
+
+    books.push(newBook);
+    res.status(201).json(newBook);
 }
 
-// PATCH /api/books/:id
 function updateBook(req, res) {
-  const id = Number(req.params.id);
-  const body = req.body || {};
+    const id = Number(req.params.id);
+    const book = books.find((b) => b.id === id);
 
-  if (!bookModel.getById(id)) {
-    return res.status(404).json({ error: 'Book not found' });
-  }
+    if (!book) {
+        return res.status(404).json({ error: 'Book not found' });
+    }
 
-  // Only known fields can be changed
-  const changes = {};
-  for (const field of REQUIRED_FIELDS) {
-    if (body[field] !== undefined) changes[field] = body[field];
-  }
+    if (!req.body) {
+        return res.status(400).json({ error: 'Request body is required' });
+    }
 
-  if (Object.keys(changes).length === 0) {
-    return res.status(400).json({ error: `Provide at least one field to update: ${REQUIRED_FIELDS.join(', ')}` });
-  }
+    if (req.body.authorId) {
+        const author = authors.find((a) => a.id === Number(req.body.authorId));
 
-  const emptyFields = Object.keys(changes).filter((field) => isEmpty(changes[field]));
-  if (emptyFields.length > 0) {
-    return res.status(400).json({ error: `Fields cannot be empty: ${emptyFields.join(', ')}` });
-  }
+        if (!author) {
+            return res.status(400).json({ error: 'Author does not exist' });
+        }
 
-  const typeError = validateFields(changes);
-  if (typeError) {
-    return res.status(400).json({ error: typeError });
-  }
+        book.authorId = Number(req.body.authorId);
+    }
 
-  if (changes.authorId !== undefined && !authorModel.getById(changes.authorId)) {
-    return res.status(400).json({ error: 'Author does not exist' });
-  }
+    if (req.body.title) {
+        book.title = req.body.title;
+    }
 
-  const book = bookModel.update(id, changes);
-  res.status(200).json(book);
+    if (req.body.genre) {
+        book.genre = req.body.genre;
+    }
+
+    if (req.body.year) {
+        book.year = Number(req.body.year);
+    }
+
+    res.json(book);
 }
 
-// DELETE /api/books/:id
 function deleteBook(req, res) {
-  const book = bookModel.remove(Number(req.params.id));
+    const id = Number(req.params.id);
+    const index = books.findIndex((b) => b.id === id);
 
-  if (!book) {
-    return res.status(404).json({ error: 'Book not found' });
-  }
+    if (index === -1) {
+        return res.status(404).json({ error: 'Book not found' });
+    }
 
-  res.status(200).json({ message: 'Book deleted', book });
+    const deleted = books.splice(index, 1);
+    res.json({ message: 'Book deleted', book: deleted[0] });
 }
 
-// GET /api/statistics
 function getStatistics(req, res) {
-  const books = bookModel.getAll();
-  const genres = new Set(books.map((book) => book.genre));
+    const genres = [];
+    for (const book of books) {
+        if (!genres.includes(book.genre)) {
+            genres.push(book.genre);
+        }
+    }
 
-  let newestBook = null;
-  let oldestBook = null;
-  for (const book of books) {
-    if (!newestBook || book.year > newestBook.year) newestBook = book;
-    if (!oldestBook || book.year < oldestBook.year) oldestBook = book;
-  }
+    let newest = books[0];
+    let oldest = books[0];
+    for (const book of books) {
+        if (book.year > newest.year) {
+            newest = book;
+        }
+        if (book.year < oldest.year) {
+            oldest = book;
+        }
+    }
 
-  res.status(200).json({
-    booksCount: books.length,
-    authorsCount: authorModel.getAll().length,
-    genresCount: genres.size,
-    newestBook,
-    oldestBook
-  });
+    res.json({
+        booksCount: books.length,
+        authorsCount: authors.length,
+        genresCount: genres.length,
+        newestBook: newest,
+        oldestBook: oldest
+    });
 }
 
 module.exports = {
-  getAllBooks,
-  searchBooks,
-  getBookById,
-  createBook,
-  updateBook,
-  deleteBook,
-  getStatistics
+    getBooks,
+    searchBooks,
+    getBookById,
+    createBook,
+    updateBook,
+    deleteBook,
+    getStatistics
 };
