@@ -2,7 +2,7 @@
 
 **Тема:** Разработка веб-приложения с использованием Express.js, EJS и middleware
 
-**Студент:** Alexander Zaporojan, группа IA2403
+**Студент:** Alexander Zaporojan, группа IAFR2302r
 
 ## Цель работы
 

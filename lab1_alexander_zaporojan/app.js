@@ -2,7 +2,7 @@ const http = require('http');
 
 const student = {
     name: 'Alexander Zaporojan',
-    group: 'IA2403',
+    group: 'IAFR2302r',
     speciality: 'Applied Informatics'
 };
 

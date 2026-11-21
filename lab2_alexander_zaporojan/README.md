@@ -2,7 +2,7 @@
 
 **Тема:** Создание REST API на Express.js
 
-**Студент:** Alexander Zaporojan, группа IA2403
+**Студент:** Alexander Zaporojan, группа IAFR2302r
 
 ## Цель работы
 

@@ -2,7 +2,7 @@
 
 **Тема:** Создание простого HTTP-сервера на Node.js
 
-**Студент:** Alexander Zaporojan, группа IA2403
+**Студент:** Alexander Zaporojan, группа IAFR2302r
 
 ## Цель работы
 
@@ -53,8 +53,8 @@ node app.js
 ```text
 GET /             → Hello! Welcome to my first Node.js server!          [200]
 GET /about        → About: this is a simple HTTP server ...             [200]
-GET /student      → Student: Alexander Zaporojan, group: IA2403         [200]
-GET /api/student  → {"name":"Alexander Zaporojan","group":"IA2403",...} [200]
+GET /student      → Student: Alexander Zaporojan, group: IAFR2302r         [200]
+GET /api/student  → {"name":"Alexander Zaporojan","group":"IAFR2302r",...} [200]
 GET /time         → Current date and time: 21.11.2026 14:12             [200]
 GET /api/courses  → [{"title":"Server-side Development",...}, ...]      [200]
 GET /random       → Your random number: 47                              [200]
