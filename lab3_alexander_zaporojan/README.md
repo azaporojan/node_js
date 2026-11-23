@@ -4,6 +4,10 @@
 
 **Студент:** Alexander Zaporojan, группа IAFR2302r
 
+**Репозиторий:** [https://github.com/azaporojan/node_js](https://github.com/azaporojan/node_js)
+
+**Этот отчёт на GitHub:** [https://github.com/azaporojan/node_js/blob/main/lab3_alexander_zaporojan/README.md](https://github.com/azaporojan/node_js/blob/main/lab3_alexander_zaporojan/README.md)
+
 ## Цель работы
 
 Научиться делать структурированное веб-приложение на Express.js с архитектурой MVC, создавать страницы на EJS, обрабатывать HTML-формы, использовать middleware и выполнять добавление, просмотр, редактирование и удаление данных.

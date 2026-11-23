@@ -4,17 +4,21 @@
 
 **Студент:** Alexander Zaporojan, группа IAFR2302r
 
+**Репозиторий:** [https://github.com/azaporojan/node_js](https://github.com/azaporojan/node_js)
+
+**Этот файл на GitHub:** [https://github.com/azaporojan/node_js/blob/main/README.md](https://github.com/azaporojan/node_js/blob/main/README.md)
+
 ## Структура репозитория
 
 Каждая лабораторная работа лежит в своей папке. Внутри каждой папки есть свой `README.md` — это отчёт по работе.
 
 | Папка | Тема | Отчёт |
 | --- | --- | --- |
-| `lab1_alexander_zaporojan` | Простой HTTP-сервер на модуле `http` | [README](lab1_alexander_zaporojan/README.md) |
-| `lab2_alexander_zaporojan` | REST API на Express.js (книги и авторы) | [README](lab2_alexander_zaporojan/README.md) |
-| `lab3_alexander_zaporojan` | Веб-приложение на Express.js, EJS и middleware | [README](lab3_alexander_zaporojan/README.md) |
-| `lab4_alexander_zaporojan` | CRUD-приложение с PostgreSQL и Sequelize | [README](lab4_alexander_zaporojan/README.md) |
-| `lab5_alexander_zaporojan` | Аутентификация, авторизация, логи и WebSocket | [README](lab5_alexander_zaporojan/README.md) |
+| `lab1_alexander_zaporojan` | Простой HTTP-сервер на модуле `http` | [README](https://github.com/azaporojan/node_js/blob/main/lab1_alexander_zaporojan/README.md) |
+| `lab2_alexander_zaporojan` | REST API на Express.js (книги и авторы) | [README](https://github.com/azaporojan/node_js/blob/main/lab2_alexander_zaporojan/README.md) |
+| `lab3_alexander_zaporojan` | Веб-приложение на Express.js, EJS и middleware | [README](https://github.com/azaporojan/node_js/blob/main/lab3_alexander_zaporojan/README.md) |
+| `lab4_alexander_zaporojan` | CRUD-приложение с PostgreSQL и Sequelize | [README](https://github.com/azaporojan/node_js/blob/main/lab4_alexander_zaporojan/README.md) |
+| `lab5_alexander_zaporojan` | Аутентификация, авторизация, логи и WebSocket | [README](https://github.com/azaporojan/node_js/blob/main/lab5_alexander_zaporojan/README.md) |
 
 Лабораторные №3, №4 и №5 — это один проект «Система управления учебными курсами». В каждой следующей работе он становится больше:
 

@@ -4,6 +4,10 @@
 
 **Студент:** Alexander Zaporojan, группа IAFR2302r
 
+**Репозиторий:** [https://github.com/azaporojan/node_js](https://github.com/azaporojan/node_js)
+
+**Этот отчёт на GitHub:** [https://github.com/azaporojan/node_js/blob/main/lab5_alexander_zaporojan/README.md](https://github.com/azaporojan/node_js/blob/main/lab5_alexander_zaporojan/README.md)
+
 ## Цель работы
 
 Научиться делать регистрацию и вход пользователей, безопасно хранить пароли, использовать сессии, разделять права доступа, проверять входные данные, обрабатывать ошибки в одном месте, вести журнал запросов и отправлять уведомления в реальном времени.

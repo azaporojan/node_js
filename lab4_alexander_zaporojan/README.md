@@ -4,6 +4,10 @@
 
 **Студент:** Alexander Zaporojan, группа IAFR2302r
 
+**Репозиторий:** [https://github.com/azaporojan/node_js](https://github.com/azaporojan/node_js)
+
+**Этот отчёт на GitHub:** [https://github.com/azaporojan/node_js/blob/main/lab4_alexander_zaporojan/README.md](https://github.com/azaporojan/node_js/blob/main/lab4_alexander_zaporojan/README.md)
+
 ## Цель работы
 
 Научиться подключать Node.js-приложение к PostgreSQL, создавать модели в Sequelize, делать связи между моделями и выполнять операции создания, просмотра, редактирования и удаления данных.

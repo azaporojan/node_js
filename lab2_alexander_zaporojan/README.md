@@ -4,6 +4,10 @@
 
 **Студент:** Alexander Zaporojan, группа IAFR2302r
 
+**Репозиторий:** [https://github.com/azaporojan/node_js](https://github.com/azaporojan/node_js)
+
+**Этот отчёт на GitHub:** [https://github.com/azaporojan/node_js/blob/main/lab2_alexander_zaporojan/README.md](https://github.com/azaporojan/node_js/blob/main/lab2_alexander_zaporojan/README.md)
+
 ## Цель работы
 
 Познакомиться с Express.js, научиться создавать маршруты, работать с параметрами URL и query-параметрами, возвращать JSON и разделять проект по архитектуре MVC.
